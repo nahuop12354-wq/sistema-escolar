@@ -840,7 +840,7 @@ async function handleLogin() {
   if (!email || !pass) { err.textContent = 'Completá todos los campos.'; err.style.display = 'block'; return; }
 
   const { data, error } = await db.from('usuarios').select('*').eq('email', email).eq('password', pass).single();
-  if (error || !data) { err.textContent = 'Email o contraseña incorrectos.'; err.style.display = 'block'; return; }
+  if (error || !data) { err.textContent = 'Error: ' + (error?.message || 'Sin datos') + ' | código: ' + (error?.code || 'none'); err.style.display = 'block'; return; }
 
   currentUser = data;
   initApp();
